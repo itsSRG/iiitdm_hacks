@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'ResolveIIIT-DM',
       routes: <String, WidgetBuilder>{
          '/':      (BuildContext context) => new LoginPage(),
-         '/forum': (BuildContext context) => new Questions(),
+         '/questions': (BuildContext context) => new Questions(),
          '/forum/1': (BuildContext context) => new ForumDetailPage(),
          '/individual_question': (BuildContext context) => new Question(qid: 12),
       },

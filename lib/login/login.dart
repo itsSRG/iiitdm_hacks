@@ -14,9 +14,22 @@ class _LoginPageState extends State<LoginPage> {
   GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
+  void initState() {
+    super.initState();
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
+      setState(() {
+        _userObj = account;
+      });
+      // if (_userObj != null) {
+      //   _handleGetContact();
+      // }
+    });
+    _googleSignIn.signInSilently();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Codesundar")),
+      appBar: AppBar(title: Text("ResolveIIIT DM")),
       body: Container(
         child: _isLoggedIn
             ? Column(
@@ -40,10 +53,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text("Login with Google"),
                   onPressed: () {
                     _googleSignIn.signIn().then((userData) {
-                      setState(() {
-                        _isLoggedIn = true;
-                        _userObj = userData;
-                      });
+                      _isLoggedIn = true;
+                      _userObj = userData;
+                      Navigator.of(context).pushNamedAndRemoveUntil('/questions', (route) => false);
                     }).catchError((e) {
                       print(e);
                     });

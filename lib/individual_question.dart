@@ -128,7 +128,11 @@ class _QuestionState extends State<Question> {
                                             Icons.check,
                                             color: Colors.green,
                                           )
-                                        : Container(),
+                                        : Icon(
+                                            Icons.check,
+                                            color: Colors.green.withOpacity(0),
+                                            
+                                          ),
                                     answers['a${index + 1}']
                                                 ['approved_by_officials'] ==
                                             true

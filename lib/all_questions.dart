@@ -13,6 +13,9 @@ class _QuestionsState extends State<Questions> {
   Icon customIcon = const Icon(Icons.search);
   Widget customSearchBar = const Text('Resolveiiit DM');
 
+  final TextEditingController _questionController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+
   final CollectionReference _questionsAsked =
       FirebaseFirestore.instance.collection('questions');
 
@@ -109,7 +112,9 @@ class _QuestionsState extends State<Questions> {
                 )
               ],
             ),
-            onPressed: () {},
+            onPressed: () {
+              _createOrUpdate();
+            },
           ),
         ));
   }
@@ -121,5 +126,58 @@ class _QuestionsState extends State<Questions> {
         .doc("ZCKqb4Bwf3I4osjDiegi");
 
     return data.get();
+  }
+
+  Future<void> _createOrUpdate() async {
+    await showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext ctx) {
+          return Padding(
+            padding: EdgeInsets.only(
+                top: 20,
+                left: 20,
+                right: 20,
+                // prevent the soft keyboard from covering text fields
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  controller: _questionController,
+                  decoration: const InputDecoration(labelText: 'Question'),
+                ),
+                TextField(
+                  controller: _descriptionController,
+                  decoration: const InputDecoration(
+                    labelText: 'Question Description',
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  child: Text('Ask Question'),
+                  onPressed: () async {
+                    print('pressed');
+                    final String? question = _questionController.text;
+                    final String? questionDescription =
+                        _descriptionController.text;
+                    if (question != null && questionDescription != null) {
+                        await _questionsAsked.add({"question": question, "question_description": questionDescription});
+
+                      // Clear the text fields
+                      _questionController.text = '';
+                      _descriptionController.text = '';
+                      // Hide the bottom sheet
+                      Navigator.of(context).pop();
+                    }
+                  },
+                )
+              ],
+            ),
+          );
+        });
   }
 }

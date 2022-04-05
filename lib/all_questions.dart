@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 class Questions extends StatefulWidget {
   const Questions({Key? key}) : super(key: key);
@@ -12,9 +15,29 @@ class _QuestionsState extends State<Questions> {
   Widget customSearchBar = const Text('My Personal Journal');
   List questionsAsked =
       List<String>.generate(10000, (i) => 'Quesition $i\nDescription $i');
+  // @override
+  // void initState() {
+  //   super.initState();
+    
+  // }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return FutureBuilder(
+      // Initialize FlutterFire
+      future: getData(),
+      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return Text('Something Went Wrong');
+        }
+
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> dataMap = snapshot.data!.data() as Map<String, dynamic>;
+          print(dataMap);
+          // return Text("Full Name: ${data['full_name']} ${data['last_name']}");
+          
+          return Scaffold(
         appBar: AppBar(
           title: customSearchBar,
           automaticallyImplyLeading: false,
@@ -52,7 +75,7 @@ class _QuestionsState extends State<Questions> {
                     );
                   } else {
                     customIcon = const Icon(Icons.search);
-                    customSearchBar = const Text('My Personal Journal');
+                    customSearchBar = const Text('Resolveiiit DM');
                   }
                 });
               },
@@ -112,5 +135,24 @@ class _QuestionsState extends State<Questions> {
           ),
         )
         );
+        }
+
+        // Otherwise, show something whilst waiting for initialization to complete
+        return CircularProgressIndicator();
+      },
+    );
+    
   }
+
+  Future<DocumentSnapshot> getData() async {
+    await Firebase.initializeApp();
+    var data = await FirebaseFirestore.instance
+        .collection("questions")
+        .doc("ZCKqb4Bwf3I4osjDiegi");
+    
+    return data.get();
+  }
+
+
 }
+

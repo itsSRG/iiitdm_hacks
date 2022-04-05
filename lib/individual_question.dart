@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'dart:convert' show json;
 
 class Question extends StatefulWidget {
   const Question({Key? key, required this.qid}) : super(key: key);
-  final String qid;
+  final int qid;
 
   @override
   _QuestionState createState() => _QuestionState();
@@ -13,14 +10,8 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   Icon customIcon = const Icon(Icons.search);
-  Widget customSearchBar = const Text('Revealiiit DM');
-
-  final TextEditingController _questionController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
-
-  final CollectionReference _questionsAsked =
-      FirebaseFirestore.instance.collection('questions');
-
+  Widget customSearchBar = const Text('My Personal Journal');
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,39 +62,84 @@ class _QuestionState extends State<Question> {
           centerTitle: true,
         ),
         body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: StreamBuilder(
-            stream: _questionsAsked.snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-              if (streamSnapshot.hasData) {
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: streamSnapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      final DocumentSnapshot documentSnapshot =
-                          streamSnapshot.data!.docs[index];
-                      return Card(
-                        margin: const EdgeInsets.all(10),
-                        child: ListTile(
-                            title: Text(documentSnapshot.toString()
-                            ),
-                            subtitle: Text(
-                              documentSnapshot.data().toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              softWrap: false,
-                            )),
-                      );
-                    },
-                  ),
-                );
-              }
-
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
+          padding: EdgeInsets.all(20),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Is CV a pre-requisite for DIP ?',
+                style: TextStyle(fontSize: 25),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+             Row(
+      children: [
+        Column(children: [
+          Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+          Icon(Icons.check,color: Colors.green,
+          )
+        ]),
+        Column(
+          children: [
+            Icon(Icons.arrow_upward),
+            Text('10'),
+            Icon(Icons.arrow_downward)
+          ],
+        ),
+        SizedBox(
+          width: 50,
+        ),
+        Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'No, CV is not a pre-requisite \nfor DIP, more details can be \nfound at the course syllabus \npage.',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(height: 25),
+            Text(
+              'Comment: Thanks !',
+              style: TextStyle(fontSize: 15),
+              textAlign: TextAlign.left,
+            )
+          ],
+        )
+      ]),
+      SizedBox(height: 25),
+      Row(
+      children: [
+        SizedBox(width: 24,),
+        Column(
+          children: [
+            Icon(Icons.arrow_upward),
+            Text('-1'),
+            Icon(Icons.arrow_downward)
+          ],
+        ),
+        SizedBox(
+          width: 50,
+        ),
+        Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Yes, I believe that\'s true.',
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(
+          width: 50,
+        ),
+            Text(
+              'Comment: The opposite was \ndiscussed at the meeting, this \ninfo is false !',
+              style: TextStyle(fontSize: 15),
+              textAlign: TextAlign.left,
+            ),
+            SizedBox(height: 25),
+          ],
+        )
+      ])
+            ],
           ),
         ),
         floatingActionButton: Container(
@@ -125,26 +161,4 @@ class _QuestionState extends State<Question> {
           ),
         ));
   }
-
-//   Future<void> getCategoriesCollectionFromFirebase() async {
-//     DocumentSnapshot snapshot = await _questionsAsked.doc('categories').get();
-//     if (snapshot.exists) {
-//       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-//       var answerData = data[widget.qid] as List<dynamic>;
-//       answerData.forEach((catData) {
-//         var answer = {
-//           'approved_by_officials':
-//               json.decode(catData)['approved_by_officials'],
-//           'approved_by_questoiner':
-//               json.decode(catData)['approved_by_questoiner'],
-//           'comments': json.decode(catData)['comments'],
-//           'description': json.decode(catData)['description'],
-//           'downvote': json.decode(catData)['downvote'],
-//           'upvote': json.decode(catData)['upvote']
-//         };
-
-//         print(answer);
-//       });
-//     }
-//   }
 }

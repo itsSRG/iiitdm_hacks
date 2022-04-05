@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'forum_detail.dart';
 import 'login/login.dart';
 import 'all_questions.dart';
 import 'individual_question.dart';
@@ -19,8 +18,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
          '/':      (BuildContext context) => new LoginPage(),
          '/questions': (BuildContext context) => new Questions(),
-         '/forum/1': (BuildContext context) => new ForumDetailPage(),
-         '/individual_question': (BuildContext context) => new Question(qid: 12),
+        //  '/individual_question': (BuildContext context) => new Question(qid: 12),
       },
       initialRoute: '/',
     );

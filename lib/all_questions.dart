@@ -22,15 +22,11 @@ class _QuestionsState extends State<Questions> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         appBar: AppBar(
           title: customSearchBar,
           automaticallyImplyLeading: false,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back)),
           actions: [
             IconButton(
               onPressed: () {
@@ -78,10 +74,11 @@ class _QuestionsState extends State<Questions> {
                 itemBuilder: (context, index) {
                   final DocumentSnapshot documentSnapshot =
                       streamSnapshot.data!.docs[index];
+                  // print(documentSnapshot.id);
                   return Card(
                     margin: const EdgeInsets.all(10),
                     child: ListTile(onTap: (){
-                      Navigator.pushNamed(context, '/individual_question');
+                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => new Question(qid: documentSnapshot.id,question: documentSnapshot['question'], description: documentSnapshot['question_description'],)));
                     },
                         title: Text(documentSnapshot['question']),
                         subtitle: Text(

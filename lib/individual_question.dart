@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'dart:convert' show json;
 
 class Question extends StatefulWidget {
   const Question({Key? key, required this.qid}) : super(key: key);
-  final int qid;
+  final String qid;
 
   @override
   _QuestionState createState() => _QuestionState();
@@ -10,44 +13,14 @@ class Question extends StatefulWidget {
 
 class _QuestionState extends State<Question> {
   Icon customIcon = const Icon(Icons.search);
-  Widget customSearchBar = const Text('My Personal Journal');
-  List answersGiven = List<Row>.generate(
-    10000,
-    (i) => Row(
-      children: [
-        Column(children: [
-          Icon(
-            Icons.check,
-            color: Colors.green,
-          ),
-          Icon(Icons.check)
-        ]),
-        Column(
-          children: [
-            Icon(Icons.arrow_upward),
-            Text('0'),
-            Icon(Icons.arrow_downward)
-          ],
-        ),
-        SizedBox(
-          width: 50,
-        ),
-        Column(
-          children: [
-            Text(
-              'Answer $i',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 25),
-            Text(
-              'comments $i',
-              style: TextStyle(fontSize: 20),
-            )
-          ],
-        )
-      ],
-    ),
-  );
+  Widget customSearchBar = const Text('Revealiiit DM');
+
+  final TextEditingController _questionController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+
+  final CollectionReference _questionsAsked =
+      FirebaseFirestore.instance.collection('questions');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +61,7 @@ class _QuestionState extends State<Question> {
                     );
                   } else {
                     customIcon = const Icon(Icons.search);
-                    customSearchBar = const Text('My Personal Journal');
+                    customSearchBar = const Text('Resolveiiit DM');
                   }
                 });
               },
@@ -98,38 +71,39 @@ class _QuestionState extends State<Question> {
           centerTitle: true,
         ),
         body: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Text(
-                'Question Title: Lorem Ipsum',
-                style: TextStyle(fontSize: 25),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: answersGiven.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        const Divider(
-                          color: Colors.black,
-                        ),
-                        ListTile(
-                          title: answersGiven[index],
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, '/individual_question');
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              )
-            ],
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: StreamBuilder(
+            stream: _questionsAsked.snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+              if (streamSnapshot.hasData) {
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: streamSnapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      final DocumentSnapshot documentSnapshot =
+                          streamSnapshot.data!.docs[index];
+                      return Card(
+                        margin: const EdgeInsets.all(10),
+                        child: ListTile(
+                            title: Text(documentSnapshot.toString()
+                            ),
+                            subtitle: Text(
+                              documentSnapshot.data().toString(),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: false,
+                            )),
+                      );
+                    },
+                  ),
+                );
+              }
+
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           ),
         ),
         floatingActionButton: Container(
@@ -151,4 +125,26 @@ class _QuestionState extends State<Question> {
           ),
         ));
   }
+
+//   Future<void> getCategoriesCollectionFromFirebase() async {
+//     DocumentSnapshot snapshot = await _questionsAsked.doc('categories').get();
+//     if (snapshot.exists) {
+//       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+//       var answerData = data[widget.qid] as List<dynamic>;
+//       answerData.forEach((catData) {
+//         var answer = {
+//           'approved_by_officials':
+//               json.decode(catData)['approved_by_officials'],
+//           'approved_by_questoiner':
+//               json.decode(catData)['approved_by_questoiner'],
+//           'comments': json.decode(catData)['comments'],
+//           'description': json.decode(catData)['description'],
+//           'downvote': json.decode(catData)['downvote'],
+//           'upvote': json.decode(catData)['upvote']
+//         };
+
+//         print(answer);
+//       });
+//     }
+//   }
 }

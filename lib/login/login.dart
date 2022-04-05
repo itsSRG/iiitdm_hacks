@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("ResolveIIIT DM")),
+      appBar: AppBar(title: Text("Resolveiiit DM")),
       body: Container(
         child: _isLoggedIn
             ? Questions()

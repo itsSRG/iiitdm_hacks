@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'individual_question.dart';
 
 class Questions extends StatefulWidget {
   const Questions({Key? key}) : super(key: key);
@@ -79,7 +80,9 @@ class _QuestionsState extends State<Questions> {
                       streamSnapshot.data!.docs[index];
                   return Card(
                     margin: const EdgeInsets.all(10),
-                    child: ListTile(
+                    child: ListTile(onTap: (){
+                      Navigator.pushNamed(context, '/individual_question');
+                    },
                         title: Text(documentSnapshot['question']),
                         subtitle: Text(
                           documentSnapshot['question_description'],

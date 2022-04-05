@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'forum.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'forum_detail.dart';
 import 'login/login.dart';
 import 'all_questions.dart';
 import 'individual_question.dart';
 
-void main() => runApp(new MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  
+  runApp(new MyApp());}
 
 class MyApp extends StatelessWidget {
   @override

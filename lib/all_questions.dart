@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-
 class Questions extends StatefulWidget {
   const Questions({Key? key}) : super(key: key);
 
@@ -12,32 +11,14 @@ class Questions extends StatefulWidget {
 
 class _QuestionsState extends State<Questions> {
   Icon customIcon = const Icon(Icons.search);
-  Widget customSearchBar = const Text('My Personal Journal');
-  List questionsAsked =
-      List<String>.generate(10000, (i) => 'Quesition $i\nDescription $i');
-  // @override
-  // void initState() {
-  //   super.initState();
-    
-  // }
+  Widget customSearchBar = const Text('Resolveiiit DM');
+
+  final CollectionReference _questionsAsked =
+      FirebaseFirestore.instance.collection('questions');
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      // Initialize FlutterFire
-      future: getData(),
-      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        // Check for errors
-        if (snapshot.hasError) {
-          return Text('Something Went Wrong');
-        }
-
-        // Once complete, show your application
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> dataMap = snapshot.data!.data() as Map<String, dynamic>;
-          print(dataMap);
-          // return Text("Full Name: ${data['full_name']} ${data['last_name']}");
-          
-          return Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: customSearchBar,
           automaticallyImplyLeading: false,
@@ -84,37 +65,34 @@ class _QuestionsState extends State<Questions> {
           ],
           centerTitle: true,
         ),
-        body: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Text(
-                'All Questions',
-                style: TextStyle(fontSize: 25),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: questionsAsked.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        const Divider(
-                          color: Colors.black,
-                        ),
-                        ListTile(
-                          title: Text(questionsAsked[index]),
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, '/individual_question');
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              )
-            ],
-          ),
+        body: StreamBuilder(
+          stream: _questionsAsked.snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+            if (streamSnapshot.hasData) {
+              return ListView.builder(
+                itemCount: streamSnapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  final DocumentSnapshot documentSnapshot =
+                      streamSnapshot.data!.docs[index];
+                  return Card(
+                    margin: const EdgeInsets.all(10),
+                    child: ListTile(
+                        title: Text(documentSnapshot['question']),
+                        subtitle: Text(
+                          documentSnapshot['question_description'],
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
+                        )),
+                  );
+                },
+              );
+            }
+
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
         ),
         floatingActionButton: Container(
           width: 80.0,
@@ -133,15 +111,7 @@ class _QuestionsState extends State<Questions> {
             ),
             onPressed: () {},
           ),
-        )
-        );
-        }
-
-        // Otherwise, show something whilst waiting for initialization to complete
-        return CircularProgressIndicator();
-      },
-    );
-    
+        ));
   }
 
   Future<DocumentSnapshot> getData() async {
@@ -149,10 +119,7 @@ class _QuestionsState extends State<Questions> {
     var data = await FirebaseFirestore.instance
         .collection("questions")
         .doc("ZCKqb4Bwf3I4osjDiegi");
-    
+
     return data.get();
   }
-
-
 }
-

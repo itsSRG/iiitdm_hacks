@@ -24,12 +24,14 @@ The App is built in Flutter wherein the entire structure was built from scratch.
 - Custom Feed for every user based on their Academic Year / Designation (Professor, Deam Ac, Dean SA etc.)
 - Rewarding System for answering queries with extra points for Officially approved Answer
 
+## Hackathon Day Development
+Successfully completed a working prototype with core functionality. The Setup of Firebase services was done and then implemention of Google Sign in, Database setup for adding user question and answers was done. The functionality was then added to Flutter code. A detailed UI of the final product we envisioned was also developed, which can be viewed through the Figma link above.
+
 ## UI Prototype Link
 https://www.figma.com/proto/W5tqBTL2k8GT6TRZqpAN7b/GDSC-Hackathon?node-id=126%3A831&scaling=scale-down&page-id=0%3A1&starting-point-node-id=126%3A831
 
-## Hackathon Day Development
-//TBC (To be Completed)
+## Screenshots / Videos of Prototype
+Canva Presentation Link:
 
-## Screenshots
-//TBC (To be Completed)
+Prototype Link: https://drive.google.com/file/d/1QiraLannaA1ZhZ2t6Jwaj_pIAiDU11Lp/view?usp=sharing
 

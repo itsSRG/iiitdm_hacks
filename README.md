@@ -16,6 +16,10 @@ A community based query management system for IIITDM wherein any student can pos
 The App is built in Flutter wherein the entire structure was built from scratch. Firebase Authentication is used to provide Sign-in using Google which is used to import a user's College Profile. Firestore Database is used as a back-end system to store the queries and answers.
 
 ## Prototype Features
+<img width="194" alt="Screenshot_2022-04-05_at_3 10 07_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161899673-3f57256f-ef76-4aab-8207-4450356344c9.png">
+
+<img width="189" alt="Screenshot_2022-04-05_at_3 27 34_PM-removebg-preview png 07-11-27-730" src="https://user-images.githubusercontent.com/67387709/161899863-94f05369-45e8-47c8-b0bc-0261b3c27653.png">
+
 - A rich UI to upload any query
 - Tagging of Query based on most frequently asked Question
 - Google Sign-in to import College Profile

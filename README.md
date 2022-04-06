@@ -42,6 +42,9 @@ The App is built in Flutter wherein the entire structure was built from scratch.
 <img width="190" alt="Screenshot_2022-04-05_at_3 36 14_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161900710-88d6a18e-901d-408f-a7bb-2a1d9ea94847.jpg">
 
 <img width="190" alt="Screenshot_2022-04-05_at_3 37 05_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161900673-71ba4e0b-4c9c-4c55-ab74-f40558514bcc.jpg">
+ 
+<img width="190" alt="Screenshot_2022-04-05_at_3 37 05_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161901409-c0d69865-3e77-4c94-b68d-e7537340e7e3.jpg">
+  
 </p>
 
 - Successfully completed a working prototype with core functionality. 
@@ -51,11 +54,11 @@ The App is built in Flutter wherein the entire structure was built from scratch.
 
 A Detailed UI of the final product we envisioned was also developed, which can be viewed through the Figma link above.
 
-## UI Prototype Link
+## UI Prototype Testing Link
 https://www.figma.com/proto/W5tqBTL2k8GT6TRZqpAN7b/GDSC-Hackathon?node-id=126%3A831&scaling=scale-down&page-id=0%3A1&starting-point-node-id=126%3A831
 
 ## Screenshots / Videos of Prototype
-Canva Presentation Link: https://www.canva.com/design/DAE8-sYHH68/zp8ezPzEXgSGRMEOEEYPRg/view?utm_content=DAE8-sYHH68&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+Presentation Link: https://www.canva.com/design/DAE8-sYHH68/zp8ezPzEXgSGRMEOEEYPRg/view?utm_content=DAE8-sYHH68&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
-Hackathon Day Prototype Link: https://drive.google.com/file/d/1QiraLannaA1ZhZ2t6Jwaj_pIAiDU11Lp/view?usp=sharing
+Hackathon Day Prototype Video: https://drive.google.com/file/d/1QiraLannaA1ZhZ2t6Jwaj_pIAiDU11Lp/view?usp=sharing
 

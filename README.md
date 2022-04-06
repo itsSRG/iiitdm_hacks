@@ -16,9 +16,15 @@ A community based query management system for IIITDM wherein any student can pos
 The App is built in Flutter wherein the entire structure was built from scratch. Firebase Authentication is used to provide Sign-in using Google which is used to import a user's College Profile. Firestore Database is used as a back-end system to store the queries and answers.
 
 ## Prototype Features
-<img width="194" alt="Screenshot_2022-04-05_at_3 10 07_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161899673-3f57256f-ef76-4aab-8207-4450356344c9.png">
+<p>
+<img width="205" alt="Screenshot_2022-04-05_at_3 10 07_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161899673-3f57256f-ef76-4aab-8207-4450356344c9.png">
+  
+<img width="195" alt="Screenshot_2022-04-05_at_3 27 34_PM-removebg-preview png 07-11-27-730" src="https://user-images.githubusercontent.com/67387709/161901018-5e8fb6cc-4e59-4303-80aa-00583bee982f.png">
 
-<img width="189" alt="Screenshot_2022-04-05_at_3 27 34_PM-removebg-preview png 07-11-27-730" src="https://user-images.githubusercontent.com/67387709/161899863-94f05369-45e8-47c8-b0bc-0261b3c27653.png">
+<img width="208" alt="Screenshot_2022-04-05_at_3 36 14_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161900458-5c3baaab-08b3-4d09-a967-c32faca520e4.png">
+
+<img width="199" alt="Screenshot_2022-04-05_at_3 37 05_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161900476-b96c3b9e-570b-4637-bcf0-1ec4c5530000.png">
+</p>
 
 - A rich UI to upload any query
 - Tagging of Query based on most frequently asked Question
@@ -29,6 +35,15 @@ The App is built in Flutter wherein the entire structure was built from scratch.
 - Rewarding System for verified answering queries with extra points for Officially approved Answer
 
 ## Hackathon Day Development
+
+<p>
+<img width="190" alt="Screenshot_2022-04-05_at_3 10 07_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161900921-f30aa21c-be1b-441d-97d9-f6a6cd599cde.jpg">
+
+<img width="190" alt="Screenshot_2022-04-05_at_3 36 14_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161900710-88d6a18e-901d-408f-a7bb-2a1d9ea94847.jpg">
+
+<img width="190" alt="Screenshot_2022-04-05_at_3 37 05_PM-removebg-preview" src="https://user-images.githubusercontent.com/67387709/161900673-71ba4e0b-4c9c-4c55-ab74-f40558514bcc.jpg">
+</p>
+
 - Successfully completed a working prototype with core functionality. 
 - Setup of Firebase services and implemention of Google Sign-in
 - Database setup for adding user question and answers
